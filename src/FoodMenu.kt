@@ -1,5 +1,5 @@
 data class FoodMenu(
-    val foodName : String,
-    val foodPriceInString : String,
-    val foodPrice : Int
+    var foodName : String,
+    var foodPriceInString : String,
+    var foodPrice : Int
 )

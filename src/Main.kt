@@ -2,7 +2,7 @@
 import java.text.NumberFormat
 import java.util.*
 
-class App(private var author : String) { // argument in constructor
+class App(private var author : String?) { // argument in constructor
     private val foodMenu = listOf(
         FoodMenu(
             "Ayam Bakar",
@@ -45,7 +45,11 @@ class App(private var author : String) { // argument in constructor
     private fun printAuthor() {
         println("================================")
         println("Food Order Application")
-        println("Created By : $author")
+        author?.let {
+            println("Created By : $author")
+        } ?: run {
+            println("This program is Open Source")
+        }
         println("================================")
     }
 
@@ -67,7 +71,7 @@ class App(private var author : String) { // argument in constructor
                 chooseFood()
             }
 
-            println("Kamu memilih menu $userChoice")
+            println("Kamu memilih menu ${userChoice + 1}")
             println("Nama Menu\t: ${foodMenu[userChoice].foodName}")
             println("Harga\t\t: ${foodMenu[userChoice].foodPriceInString}")
         } catch (e : Exception) {
@@ -80,7 +84,9 @@ class App(private var author : String) { // argument in constructor
         print("\nMasukkan Nominal Pembayaran : ")
         try {
             val userInp = readln().toInt()
-            if(userInp < foodMenu[userChoice].foodPrice) {
+            val userFoodPrice = foodMenu[userChoice].foodPrice
+
+            if(userInp < userFoodPrice) {
                 println("Maaf, pembayaran Anda gagal!")
                 println("* Nominal Pembayaran Anda Kurang")
                 enterPayment()
@@ -92,7 +98,7 @@ class App(private var author : String) { // argument in constructor
                 format.maximumFractionDigits = 0
                 format.currency = Currency.getInstance("IDR")
 
-                println("Kembalian Anda : ${format.format(userInp - foodMenu[userChoice].foodPrice)} ")
+                println("Kembalian Anda : ${format.format(userInp - userFoodPrice)} ")
             }
         } catch (e : NumberFormatException) {
             println("Mohon Hanya Masukkan Angka!")
@@ -148,6 +154,5 @@ class App(private var author : String) { // argument in constructor
 }
 
 fun main() {
-    val app = App("Daud Dhiya' Rozaan")
-    app.run()
+    App("Daud Dhiya' Rozaan").run()
 }
