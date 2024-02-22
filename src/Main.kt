@@ -66,15 +66,16 @@ class App(private var author : String?) { // argument in constructor
             userChoice = readln().toInt() - 1
 
             // if index out of range
-            if(userChoice < 0 || userChoice > 4) {
+            // choose food again
+            if(userChoice !in 0..4) {
                 println("Angka Melewati Batas Index!")
                 chooseFood()
             }
 
-            println("Kamu memilih menu ${userChoice + 1}")
+            println("Kamu memilih menu ke-${userChoice + 1}")
             println("Nama Menu\t: ${foodMenu[userChoice].foodName}")
             println("Harga\t\t: ${foodMenu[userChoice].foodPriceInString}")
-        } catch (e : Exception) {
+        } catch (e : NumberFormatException) {
             println("Mohon Hanya Masukkan Angka!")
             chooseFood()
         }
@@ -86,6 +87,8 @@ class App(private var author : String?) { // argument in constructor
             val userInp = readln().toInt()
             val userFoodPrice = foodMenu[userChoice].foodPrice
 
+            // if payment nominal < food price
+            // enter payment nominal again
             if(userInp < userFoodPrice) {
                 println("Maaf, pembayaran Anda gagal!")
                 println("* Nominal Pembayaran Anda Kurang")
@@ -117,13 +120,8 @@ class App(private var author : String?) { // argument in constructor
         try {
             val userInp = readln().toInt()
 
-            // if index out of range
-            if (userInp > 2) {
-                println("Angka Melewati Batas Index!")
-                chooseDelivery()
-            }
             // if choose take-away
-            else if (userInp == 1) {
+            if (userInp == 1) {
                 waiting("Makananmu sedang dimasak (5 detik) ", 5)
                 waiting("Makananmu sudah siap! Silakan ambil di resto ya! (5 detik) ", 5)
                 waiting("Pesanan selesai! (3 detik) ", 3)
@@ -133,6 +131,12 @@ class App(private var author : String?) { // argument in constructor
                 waiting("Makananmu sedang dimasak (5 detik) ", 5)
                 waiting("Makananmu sudah siap! Driver segera menuju tempatmu! (5 detik) ", 5)
                 waiting("Driver sampai! Pesanan selesai! (3 detik) ", 3)
+            }
+            // if index out of range
+            // choose again delivery method
+            else {
+                println("Angka Melewati Batas Index!")
+                chooseDelivery()
             }
         } catch (e : NumberFormatException) {
             println("Mohon Hanya Masukkan Angka!")
