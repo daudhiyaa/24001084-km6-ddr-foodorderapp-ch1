@@ -1,7 +1,3 @@
-package practice
-
-import FoodMenu
-
 class LoopingExample {
     private val foodMenu = listOf(
         FoodMenu(

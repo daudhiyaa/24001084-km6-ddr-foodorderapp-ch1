@@ -1,5 +1,3 @@
-package practice
-
 class ControlFlowExample {
     fun run() {
         println(checkNameUsingIfElse("puji astuti"))

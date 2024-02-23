@@ -1,7 +1,3 @@
-package practice
-
-import FoodMenu
-
 class ScopeFunctionExample {
     private val author : String? = null
     private var food : FoodMenu? = FoodMenu(
