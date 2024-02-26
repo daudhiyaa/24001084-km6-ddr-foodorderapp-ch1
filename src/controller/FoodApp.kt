@@ -41,14 +41,15 @@ class App(private var author : String?) { // argument in constructor
 
             // if index out of range
             // choose food again
-            if(userChoice !in 0..4) {
+            if(userChoice !in foodMenu.indices) {
                 println("Angka Melewati Batas Index!")
                 chooseFood()
             }
-
-            println("Kamu memilih menu ke-${userChoice + 1}")
-            println("Nama Menu\t: ${foodMenu[userChoice].foodName}")
-            println("Harga\t\t: ${foodMenu[userChoice].foodPriceInString}")
+            else {
+                println("Kamu memilih menu ke-${userChoice + 1}")
+                println("Nama Menu\t: ${foodMenu[userChoice].foodName}")
+                println("Harga\t\t: ${foodMenu[userChoice].foodPriceInString}")
+            }
         } catch (e : NumberFormatException) {
             println("Mohon Hanya Masukkan Angka!")
             chooseFood()
