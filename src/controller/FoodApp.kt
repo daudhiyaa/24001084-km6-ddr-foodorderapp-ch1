@@ -122,10 +122,7 @@ class App(private var author : String?) { // argument in constructor
     private fun waiting(msg : String, durationInSecond : Int) {
         print(msg)
         for (i in 1..durationInSecond) { // waiting 'n' seconds
-            val startTime = System.currentTimeMillis() // fetch starting time
-            while((System.currentTimeMillis()-startTime) < 1000) {
-                // waiting each second
-            }
+            Thread.sleep(1000)
             print(".")
         }
         println()
