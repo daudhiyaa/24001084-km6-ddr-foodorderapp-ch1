@@ -44,31 +44,33 @@ class MoEngageAnalytics() {
 }
 
 interface Analytics {
-    fun logEvent(e: String)
+    fun log(e: String)
 }
 
-// agnostic class
+// === Agnostic Class ===
+/*
+* Klo cuman mau firebase, nanti newRelic sama moEngage disini diapus aja yg di bagian sini
+* */
 class AppAnalytics : Analytics {
     private var firebaseAnalytics = FirebaseAnalytics()
     private var newRelicAnalytics = NewRelicAnalytics()
     private var moEngageAnalytics = MoEngageAnalytics()
 
-    override fun logEvent(e: String) {
+    override fun log(e: String) {
         firebaseAnalytics.log(e)
         newRelicAnalytics.log(e)
         moEngageAnalytics.log(e)
     }
-
 }
 
-class LoginPage(private val analytics: FirebaseAnalytics) {
+class LoginPage(private val analytics: Analytics) {
     fun openPage(pageName: String) {
         println("Open $pageName Page...")
         analytics.log(pageName)
     }
 }
 
-class HomePage(private val analytics: FirebaseAnalytics) {
+class HomePage(private val analytics: Analytics) {
     fun openPage(pageName: String) {
         println("Open $pageName Page...")
         analytics.log(pageName)
@@ -76,9 +78,11 @@ class HomePage(private val analytics: FirebaseAnalytics) {
 }
 
 class App {
+    private val analytics = AppAnalytics()
+
     fun run () {
-        LoginPage(FirebaseAnalytics()).openPage("Login")
-        HomePage(FirebaseAnalytics()).openPage("Home")
+        LoginPage(analytics).openPage("Login")
+        HomePage(analytics).openPage("Home")
     }
 
     companion object {
