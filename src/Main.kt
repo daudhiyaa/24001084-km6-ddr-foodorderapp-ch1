@@ -1,5 +1,5 @@
-import controller.App
+import controller.FoodApp
 
 fun main() {
-    App("Daud Dhiya' Rozaan").run()
+    FoodApp("Daud Dhiya' Rozaan").run()
 }

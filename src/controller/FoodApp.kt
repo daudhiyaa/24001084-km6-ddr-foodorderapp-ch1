@@ -3,8 +3,9 @@ package controller
 import java.text.NumberFormat
 import java.util.*
 import constant.foodMenu
+import model.App
 
-class App(private var author : String?) { // argument in constructor
+class FoodApp(private var author : String?) : App() { // argument in constructor
     private var userChoice = 0
 
     fun run() {
@@ -16,7 +17,7 @@ class App(private var author : String?) { // argument in constructor
         chooseDelivery()
     }
 
-    private fun printAuthor() {
+    override fun printAuthor() {
         println("================================")
         println("Food Order Application")
         author?.let {
@@ -39,8 +40,7 @@ class App(private var author : String?) { // argument in constructor
         try {
             userChoice = readln().toInt() - 1
 
-            // if index out of range
-            // choose food again
+            // if index out of range, choose food again
             if(userChoice !in foodMenu.indices) {
                 println("Angka Melewati Batas Index!")
                 chooseFood()
@@ -62,8 +62,7 @@ class App(private var author : String?) { // argument in constructor
             val userInp = readln().toInt()
             val userFoodPrice = foodMenu[userChoice].foodPrice
 
-            // if payment nominal < food price
-            // enter payment nominal again
+            // if payment nominal < food price, enter payment nominal again
             if(userInp < userFoodPrice) {
                 println("Maaf, pembayaran Anda gagal!")
                 println("* Nominal Pembayaran Anda Kurang")
@@ -71,7 +70,7 @@ class App(private var author : String?) { // argument in constructor
             } else {
                 println("Terima kasih, Anda berhasil memesan makanan")
 
-                // convert number to currency format
+                // formatting number to currency
                 val format = NumberFormat.getCurrencyInstance()
                 format.maximumFractionDigits = 0
                 format.currency = Currency.getInstance("IDR")
@@ -85,9 +84,12 @@ class App(private var author : String?) { // argument in constructor
     }
 
     private fun printListDeliveryMethod() {
-        println("\nMetode Pengiriman Makanan")
-        println("1. Take Away\n" +
-                "2. Delivery")
+        println("")
+        println("""
+            Metode Pengiriman Makanan
+            1. Take Away
+            2. Delivery
+        """.trimIndent())
     }
 
     private fun chooseDelivery(){
