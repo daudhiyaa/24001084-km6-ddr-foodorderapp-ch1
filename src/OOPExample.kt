@@ -39,27 +39,6 @@ class AMDProcessor() : Processor("Ryzen7") {
     }
 }
 
-/* Open - Closed Principle */
-open class IronManSuit() {
-    // opened function
-    open fun blast() {
-        println("Blast using Iron Man Suit")
-    }
-
-    // closed function
-    fun activateJarvis() {
-        println("Jarvis is activated")
-        Thread.sleep(1000)
-    }
-}
-
-class WarMachineSuit() : IronManSuit () {
-    override fun blast() {
-        println("Blast using War Machine Suit")
-    }
-}
-
-/* main function */
 fun main() {
     RedHotBaloon().let {
         it.carryPassennger("Daud")
