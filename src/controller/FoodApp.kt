@@ -8,7 +8,7 @@ import model.App
 class FoodApp(private var author : String?) : App() { // argument in constructor
     private var userChoice = 0
 
-    fun run() {
+    override fun run() {
         printAuthor()
         printListFood()
         chooseFood()
